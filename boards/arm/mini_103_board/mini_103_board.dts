@@ -5,7 +5,7 @@
  */
 
 /dts-v1/;
-#include <st/f1/stm32f103Xb.dtsi>
+#include <st/f1/stm32f103X8.dtsi>
 
 / {
 	model = "STMicroelectronics STM32F103RB-NUCLEO board";
@@ -21,7 +21,7 @@
 	leds {
 		compatible = "gpio-leds";
 		green_led_2: led_2 {
-			gpios = <&gpioa 5 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpioa 1 GPIO_ACTIVE_HIGH>;
 			label = "User LD2";
 		};
 	};

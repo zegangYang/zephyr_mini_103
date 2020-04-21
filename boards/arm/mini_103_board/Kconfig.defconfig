@@ -8,10 +8,6 @@ if BOARD_MIMI_103
 config BOARD
 	default "mini_103_board"
 
-config UART_2
-	default y
-	depends on UART_CONSOLE
-
 config PWM_STM32_1
 	default y
 	depends on PWM

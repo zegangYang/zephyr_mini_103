@@ -1,5 +1,5 @@
-identifier: nucleo_f103rb
-name: NUCLEO-F103RB
+identifier: mini_f103c8
+name: MINI_103c8
 type: mcu
 arch: arm
 toolchain:
@@ -7,7 +7,7 @@ toolchain:
   - gnuarmemb
   - xtools
 ram: 20
-flash: 128
+flash: 64
 supported:
   - arduino_gpio
   - arduino_spi
