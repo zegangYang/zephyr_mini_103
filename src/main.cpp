@@ -46,5 +46,6 @@ void main(void) {
     gpio_pin_set(dev, PIN, (int)led_is_on);
     led_is_on = !led_is_on;
     k_msleep(500);
+    printf("hello world\n");
   }
 }
