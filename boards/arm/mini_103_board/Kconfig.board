@@ -5,4 +5,4 @@
 
 config BOARD_MIMI_103
 	bool "MINI F103RB Development Board"
-	depends on SOC_STM32F103XB
+	depends on SOC_STM32F103X8

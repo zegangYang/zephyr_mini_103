@@ -8,9 +8,9 @@ if BOARD_MIMI_103
 config BOARD
 	default "mini_103_board"
 
-config PWM_STM32_1
-	default y
-	depends on PWM
+#config PWM_STM32_2
+#	default y
+#	depends on PWM
 
 config ADC_1
 	default y

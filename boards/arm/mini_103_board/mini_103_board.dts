@@ -21,7 +21,8 @@
 	leds {
 		compatible = "gpio-leds";
 		green_led_2: led_2 {
-			gpios = <&gpioa 1 GPIO_ACTIVE_HIGH>;
+			// gpios = <&gpioa 1 GPIO_ACTIVE_HIGH>;
+                        gpios = <&gpioa 1 GPIO_ACTIVE_HIGH>;
 			label = "User LD2";
 		};
 	};
@@ -34,9 +35,16 @@
 		};
 	};
 
+        pwmleds {
+            compatible = "pwm-leds";
+            red_pwm_led: red_pwm_led {
+                  pwms = <&{/soc/timers@40000000/pwm} 2 4>;
+              };
+        };
 	aliases {
 		led0 = &green_led_2;
 		sw0 = &user_button;
+                pwm-led0 = &red_pwm_led;
 	};
 };
 
@@ -62,8 +70,16 @@
 	status = "okay";
 
 	pwm {
-		status = "okay";
+            status = "okay";
 	};
+};
+&timers2 {
+        status = "okay";
+
+        pwm {
+            status = "okay";
+            st,prescaler = <71>;
+        };
 };
 
 &iwdg {
