@@ -95,6 +95,7 @@ void main(void) {
       }
       k_msleep(5);
     }
+    // printf("circle once \n");
   }
 }
 void main1(void) {
