@@ -12,8 +12,8 @@ config BOARD
 #	default y
 #	depends on PWM
 
-config ADC_1
-	default y
-	depends on ADC
+#config ADC_1
+#	default y
+#	depends on ADC
 
 endif # BOARD_MIMI_103

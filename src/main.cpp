@@ -11,7 +11,7 @@ int64_t g_circle_count = 0;
 /* The devicetree node identifier for the "led0" alias. */
 #define LED0_NODE DT_ALIAS(led0)
 
-#if DT_HAS_NODE(LED0_NODE)
+#if DT_NODE_HAS_STATUS(LED0_NODE, okay)
 #define LED0	DT_GPIO_LABEL(LED0_NODE, gpios)
 #define PIN	DT_GPIO_PIN(LED0_NODE, gpios)
 #if DT_PHA_HAS_CELL(LED0_NODE, gpios, flags)
@@ -29,17 +29,22 @@ int64_t g_circle_count = 0;
 #endif
 
 // pwm test
-#if defined(DT_ALIAS_PWM_LED0_PWMS_CONTROLLER) && defined(DT_ALIAS_PWM_LED0_PWMS_CHANNEL)
-/* get the defines from dt (based on alias 'pwm-led0') */
-#define PWM_DRIVER	DT_ALIAS_PWM_LED0_PWMS_CONTROLLER
-#define PWM_CHANNEL	DT_ALIAS_PWM_LED0_PWMS_CHANNEL
-#ifdef DT_ALIAS_PWM_LED0_PWMS_FLAGS
-#define PWM_FLAGS	DT_ALIAS_PWM_LED0_PWMS_FLAGS
+#define PWM_LED0_NODE	DT_ALIAS(pwm_led0)
+
+#define FLAGS_OR_ZERO(node)				\
+	COND_CODE_1(DT_PHA_HAS_CELL(node, pwms, flags),	\
+		    (DT_PWMS_FLAGS(node)),		\
+		    (0))
+
+#if DT_NODE_HAS_STATUS(PWM_LED0_NODE, okay)
+#define PWM_LABEL	DT_PWMS_LABEL(PWM_LED0_NODE)
+#define PWM_CHANNEL	DT_PWMS_CHANNEL(PWM_LED0_NODE)
+#define PWM_FLAGS	FLAGS_OR_ZERO(PWM_LED0_NODE)
 #else
+#error "Unsupported board: pwm-led0 devicetree alias is not defined"
+#define PWM_LABEL	""
+#define PWM_CHANNEL	0
 #define PWM_FLAGS	0
-#endif
-#else
-#error "Choose supported PWM driver"
 #endif
 
 /* in microseconds */
@@ -54,10 +59,10 @@ void main(void) {
   uint32_t period;
   uint8_t dir = 0;
 
-  pwm_device = device_get_binding(PWM_DRIVER);
+  pwm_device = device_get_binding(PWM_LABEL);
 
   if (!pwm_device) {
-    printf("cannot find %s \n", PWM_DRIVER);
+    printf("cannot find %s \n", PWM_LABEL);
     return;
   }
 
