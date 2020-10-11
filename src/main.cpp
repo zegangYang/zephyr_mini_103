@@ -54,12 +54,14 @@ int64_t g_circle_count = 0;
 #define MAX_PERIOD	500
 
 void main(void) {
-  struct device *pwm_device = nullptr;
+  const struct device *pwm_device = nullptr;
   uint32_t max_period;
   uint32_t period;
   uint8_t dir = 0;
 
   pwm_device = device_get_binding(PWM_LABEL);
+
+  printf("enter mini_103 pwm test app");
 
   if (!pwm_device) {
     printf("cannot find %s \n", PWM_LABEL);
@@ -104,7 +106,7 @@ void main(void) {
   }
 }
 void main1(void) {
-  struct device *dev = nullptr;
+  const struct device *dev = nullptr;
   bool led_is_on = true;
   int ret = -1;
 
